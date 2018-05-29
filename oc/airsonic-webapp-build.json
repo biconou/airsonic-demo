@@ -9,7 +9,7 @@
       "type": "Git",
       "git": {
         "uri": "https://github.com/biconou/airsonic-demo.git",
-        "ref": "master"
+        "ref": "togodo"
       }
     },
     "strategy": {

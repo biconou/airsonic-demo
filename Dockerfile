@@ -4,15 +4,16 @@
 
 FROM kirillf/centos-tomcat
 
-LABEL description="Airsonic demo." \
+LABEL description="Airsonic" \
       url="https://airsonic.github.io/"
 
 USER root
 
+RUN yum -y install nfs-utils nfs-utils-lib
+
 RUN mkdir /opt/tomcat/webapps/airsonic
 WORKDIR /opt/tomcat/webapps/airsonic
-RUN wget https://github.com/airsonic/airsonic/releases/download/v10.1.1/airsonic.war
-RUN jar xvf airsonic.war; rm airsonic.war
+RUN wget https://github.com/airsonic/airsonic/releases/download/v10.1.1/airsonic.war; jar xvf airsonic.war; rm airsonic.war
 RUN rm /opt/tomcat/conf/context.xml
 COPY context.xml /opt/tomcat/conf
 COPY demo-changelog.xml /opt/tomcat/webapps/airsonic/WEB-INF/classes/liquibase
@@ -23,9 +24,9 @@ RUN sed -i \
 WORKDIR /opt/tomcat/webapps/
 RUN rm -rf ROOT  docs  examples  host-manager  manager
 
-RUN mkdir /var/airsonic; mkdir /var/music
+RUN mkdir /var/airsonic; mkdir /var/music; mkdir /mnt/DATA
 COPY airsonic.properties /var/airsonic/airsonic.properties
 ADD music /var/music
 
 
-RUN chown -R root:root /opt/tomcat; chmod -R 770 /opt/tomcat; chmod -R 770 /var/airsonic; chmod -R 770 /var/music
+RUN chown -R root:root /opt/tomcat; chmod -R 770 /opt/tomcat; chmod -R 770 /var/airsonic; chmod -R 770 /var/music; chmod -R 770 /mnt/DATA

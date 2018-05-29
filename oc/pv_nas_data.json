@@ -1,0 +1,23 @@
+{
+    "apiVersion": "v1",
+    "kind": "PersistentVolume",
+    "metadata": {
+      "name": "pv-nas-data",
+      "labels": {
+        "id": "nas-data"
+      }
+    },
+    "spec": {
+      "capacity": {
+        "storage": "5Gi"
+      },
+      "accessModes": [
+        "ReadWriteOnce"
+      ],
+      "nfs": {
+        "path": "/mnt/DATA/NFS",
+        "server": "REMI-DELL-XPS-15"
+      },
+      "persistentVolumeReclaimPolicy": "Retain"
+    }
+  }

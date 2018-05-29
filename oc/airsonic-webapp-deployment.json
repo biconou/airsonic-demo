@@ -38,6 +38,12 @@
                 "protocol": "TCP"
               }
             ],
+            "volumeMounts": [
+              {
+                "name": "nas-data",
+                "mountPath": "/mnt/DATA"
+              }
+            ],
             "terminationMessagePath": "/dev/termination-log",
             "terminationMessagePolicy": "File",
             "resources": {
@@ -80,6 +86,14 @@
             ]
           }
         ],
+        "volumes": [
+          {
+            "name": "nas-data",
+            "persistentVolumeClaim": {
+              "claimName": "pvc-nas-data"
+            }
+          }
+        ],
         "dnsPolicy": "ClusterFirst",
         "restartPolicy": "Always",
         "schedulerName": "default-scheduler",
@@ -100,7 +114,7 @@
           "from": {
             "kind": "ImageStreamTag",
             "name": "airsonic-webapp:latest",
-            "namespace": "airsonic-demo"
+            "namespace": "airsonic"
           }
         },
         "type": "ImageChange"

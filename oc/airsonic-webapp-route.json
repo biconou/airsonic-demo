@@ -6,9 +6,10 @@
       "app": "airsonic-webapp"
     },
     "name": "airsonic-webapp",
-    "namespace": "airsonic-demo"
+    "namespace": "airsonic"
   },
   "spec": {
+    "host": "togodo",
     "path": "/airsonic",
     "port": {
       "path": "/airsonic",

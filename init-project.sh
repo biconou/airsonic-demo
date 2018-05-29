@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-oc new-project airsonic-demo \
-    --display-name='Airsonic demo' \
-    --description='This project aims to depoy an Airsonic demo application on OpenShift'
+oc new-project airsonic \
+    --display-name='Airsonic' \
+    --description='This project aims to depoy an Airsonic application on OpenShift'
 
 oc new-app --template=postgresql-persistent \
     --param=DATABASE_SERVICE_NAME=postgresql \
@@ -15,6 +15,8 @@ oc new-app --template=postgresql-persistent \
 oc create imagestream airsonic-webapp
 
 cd oc
+
+oc create -f pvc_nas_data.json
 
 oc create -f airsonic-webapp-build.json
 oc start-build airsonic-webapp-build
